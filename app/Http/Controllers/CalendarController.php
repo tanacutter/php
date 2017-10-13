@@ -7,6 +7,16 @@ use App\Calendar;
 
 class CalendarController extends Controller
 {
+  /**
+   * Auth except index
+   *
+   */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -36,10 +46,11 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-      $calendar = new Calendar;
-      $calendar->available_time = $request->available_time;
-      $calendar->save();
-      return redirect('calendars/'.$calendar->id);
+        $calendar = new Calendar;
+        $calendar->available_time = $request->available_time;
+        $calendar->user_id = $request->user()->id;
+        $calendar->save();
+        return redirect('calendars/'.$calendar->id);
     }
 
     /**
@@ -61,6 +72,7 @@ class CalendarController extends Controller
      */
     public function edit(Calendar $calendar)
     {
+        $this->authorize('edit', $calendar);
         return view('calendars.edit', ['calendar' => $calendar]);
     }
 
@@ -73,9 +85,10 @@ class CalendarController extends Controller
      */
     public function update(Request $request, Calendar $calendar)
     {
-      $calendar->available_time = $request->available_time;
-      $calendar->save();
-      return redirect('calendars/'.$calendar->id);
+        $this->authorize('edit', $calendar);
+        $calendar->available_time = $request->available_time;
+        $calendar->save();
+        return redirect('calendars/'.$calendar->id);
     }
 
     /**
@@ -86,6 +99,7 @@ class CalendarController extends Controller
      */
     public function destroy(Calendar $calendar)
     {
+        $this->authorize('edit', $calendar);
         $calendar->delete();
         return redirect('calendars.index');
     }

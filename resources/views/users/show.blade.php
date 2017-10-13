@@ -3,18 +3,21 @@
 @endphp
 @extends('layouts.my')
 @section('content')
-<h1>{{ $title }}</h1>
+    <h1>{{ $title }}</h1>
 
-<!-- 編集・削除ボタン -->
-<div>
-    <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
-        {{ __('Edit') }}
-    </a>
-    <!-- 削除ボタンは後で正式なものに置き換えます -->
-    @component('components.btn-del')
-        @slot('table', 'users')
-        @slot('id', $user->id)
-    @endcomponent</div>
+    @can('edit', $user)
+      <!-- 編集・削除ボタン -->
+      <div>
+          <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
+              {{ __('Edit') }}
+          </a>
+          @component('components.btn-del')
+              @slot('controller', 'users')
+              @slot('id', $user->id)
+              @slot('value', $user->name)
+          @endcomponent
+      </div>
+    @endcan
 
     <!-- ユーザー1件の情報 -->
     <dl class="row">
@@ -27,7 +30,7 @@
     </dl>
 
     <!-- ユーザーの全てのカレンダーを表示 -->
-    <h2>{{ __('Posts') }}</h2>
+    <h2>{{ __('Calendars') }}</h2>
     {{ $user->calendars->links() }}
     <div class="table-responsive">
         <table class="table table-striped">
@@ -37,7 +40,9 @@
                     <th>{{ __('available_time') }}</th>
                     <th>{{ __('Created') }}</th>
                     <th>{{ __('Updated') }}</th>
-                    <th></th>
+                    @can('edit', $user)
+                      <th></th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -51,16 +56,18 @@
                         <td>{{ $calendar->available_time }}</td>
                         <td>{{ $calendar->created_at }}</td>
                         <td>{{ $calendar->updated_at }}</td>
-                        <td nowrap>
-                            <a href="{{ url('calendars/'.$calendar->id.'/edit') }}" class="btn btn-primary">
-                                {{ __('Edit') }}
-                            </a>
-                            @component('components.btn-del')
-                                @slot('controller', 'calendars')
-                                @slot('id', $calendar->id)
-                                @slot('available_time', $calendar->available_time)
-                            @endcomponent
-                        </td>
+                        @can('edit', $user)
+                          <td nowrap>
+                              <a href="{{ url('calendars/'.$calendar->id.'/edit') }}" class="btn btn-primary">
+                                  {{ __('Edit') }}
+                              </a>
+                              @component('components.btn-del')
+                                  @slot('controller', 'calendars')
+                                  @slot('id', $calendar->id)
+                                  @slot('value', $calendar->available_time)
+                              @endcomponent
+                          </td>
+                        @endcan
                      </tr>
                 @endforeach
             </tbody>

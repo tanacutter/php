@@ -5,16 +5,19 @@
 @section('content')
 <h1>{{ $title }}</h1>
 
-<!-- 編集・削除ボタン -->
-<div>
-    <a href="{{ url('calendars/'.$calendar->id.'/edit') }}" class="btn btn-primary">
-        {{ __('Edit') }}
-    </a>
-    @component('components.btn-del')
-      @slot('controller', 'calendars')
-      @slot('id', $calendar->id)
-      @slot('available_time', $calendar->available_time)
-    @endcomponent</div>
+@can('edit', $calendar)
+  <!-- 編集・削除ボタン -->
+  <div>
+      <a href="{{ url('calendars/'.$calendar->id.'/edit') }}" class="btn btn-primary">
+          {{ __('Edit') }}
+      </a>
+      @component('components.btn-del')
+        @slot('controller', 'calendars')
+        @slot('id', $calendar->id)
+        @slot('value', $calendar->available_time)
+      @endcomponent
+  </div>
+@endcan
 
 <!-- カレンダー一件の情報 -->
 <dl class="row">

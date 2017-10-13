@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\CustomPasswordReset;
 
 class User extends Authenticatable
 {
@@ -37,6 +38,28 @@ class User extends Authenticatable
         // 新しい順で取得する
         return $this->hasMany('App\Calendar')->latest();
     }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomPasswordReset($token));
+    }
+
+    /**
+     * Check the loging user
+     *
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        return $this->id === config('admin_id');
+    }
+
 
 
 }

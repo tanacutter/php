@@ -20,7 +20,7 @@
             <div class="modal-body">
                 <p>{{ __('Are you sure to delete?') }}</p>
                 <p>id: <strong>{{ $id }}</strong></p>
-                <p>datetime: <strong>{{ $available_time }}</strong></p>
+                <p>value: <strong>{{ $value }}</strong></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
