@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\User;
 use App\Profile;
+use App\Http\Requests\UpdateUser;
 
 class ProfileController extends Controller
 {
@@ -39,7 +40,7 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        $user->calendars = $user->calendars()->paginate(5);      
+        $user->calendars = $user->calendars()->paginate(5);
         return view('profiles.index', ['profile' => $user]);
     }
 
@@ -52,7 +53,7 @@ class ProfileController extends Controller
     public function edit(User $user)
     {
         $this->authorize('edit', $user);
-        return view('users.edit', ['user' => $user]);
+        return view('profiles.edit', ['user' => $user]);
     }
 
     /**
@@ -68,7 +69,7 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        return redirect('users/'.$user->id)->with('status', __('Updated a user.'));
+        return redirect('profiles/'.$user->id)->with('status', __('Updated a user.'));
     }
 
     /**
@@ -81,6 +82,6 @@ class ProfileController extends Controller
     {
         $this->authorize('edit', $user);
         $user->delete();
-        return redirect('users')->with('status', __('Deleted a user.'));
+        return redirect('profiles')->with('status', __('Deleted a user.'));
     }
 }

@@ -4,7 +4,7 @@
 @extends('layouts.common')
 @section('content')
 <h1>{{ $title }}</h1>
-<form action="{{ url('users/'.$user->id) }}" method="post">
+<form action="{{ url('profiles/'.$user->id) }}" method="post">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     <div class="form-group">
