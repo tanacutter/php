@@ -56,8 +56,9 @@
                                 {{ __('Edit') }}
                             </a>
                             @component('components.btn-del')
-                                @slot('table', 'calendars')
+                                @slot('controller', 'calendars')
                                 @slot('id', $calendar->id)
+                                @slot('available_time', $calendar->available_time)
                             @endcomponent
                         </td>
                      </tr>

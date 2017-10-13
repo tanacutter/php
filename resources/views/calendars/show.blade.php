@@ -10,10 +10,10 @@
     <a href="{{ url('calendars/'.$calendar->id.'/edit') }}" class="btn btn-primary">
         {{ __('Edit') }}
     </a>
-    <!-- 削除ボタンは後で正式なものに置き換えます -->
     @component('components.btn-del')
-        @slot('table', 'calendars')
-        @slot('id', $calendar->id)
+      @slot('controller', 'calendars')
+      @slot('id', $calendar->id)
+      @slot('available_time', $calendar->available_time)
     @endcomponent</div>
 
 <!-- カレンダー一件の情報 -->
