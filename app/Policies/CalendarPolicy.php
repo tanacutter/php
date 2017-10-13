@@ -42,7 +42,6 @@ class CalendarPolicy
      */
     public function edit(User $user, Calendar $calendar)
     {
-        return true;
         return $user->id == $calendar->user_id;
     }
 }

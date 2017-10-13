@@ -60,6 +60,4 @@ class User extends Authenticatable
         return $this->id === config('admin_id');
     }
 
-
-
 }

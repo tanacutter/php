@@ -41,7 +41,6 @@ class UserPolicy
      */
     public function edit(User $userAuth, User $userPage)
     {
-        return true;
         return $userAuth->id == $userPage->id;
     }
 
