@@ -19,7 +19,7 @@
       </div>
     @endcan
 
-    <!-- ユーザー1件の情報 -->
+    <!-- ユーザー情報 -->
     <dl class="row">
         <dt class="col-md-2">{{ __('ID') }}</dt>
         <dd class="col-md-10">{{ $user->id }}</dd>
@@ -31,7 +31,7 @@
 
     <!-- ユーザーの全てのカレンダーを表示 -->
     <h2>{{ __('Calendars') }}</h2>
-    {{ $user->calendars->links() }}
+    {{ $user->calendars->links() }}<!--　ページネーション -->
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>

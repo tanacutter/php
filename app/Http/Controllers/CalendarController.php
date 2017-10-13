@@ -50,7 +50,7 @@ class CalendarController extends Controller
         $calendar->available_time = $request->available_time;
         $calendar->user_id = $request->user()->id;
         $calendar->save();
-        return redirect('calendars/' . $calendar->id)->with('status', __('Posted new article.'));
+        return redirect('calendars/' . $calendar->id)->with('status', __('Created new cal.'));
     }
 
     /**
