@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Requests\StoreUser;
 
 class UserController extends Controller
 {
@@ -41,17 +42,17 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUser $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
-        return redirect('users/'.$user->id);
+        return redirect('users/'.$user->id)->with('status', __('Created a user.'));
     }
 
     /**
@@ -81,17 +82,17 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUser $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(StoreUser $request, User $user)
     {
         $this->authorize('edit', $user);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        return redirect('users/'.$user->id);
+        return redirect('users/'.$user->id)->with('status', __('Updated a user.'));
     }
 
     /**
@@ -104,6 +105,6 @@ class UserController extends Controller
     {
         $this->authorize('edit', $user);
         $user->delete();
-        return redirect('users');
+        return redirect('users')->with('status', __('Deleted a user.'));
     }
 }

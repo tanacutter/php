@@ -10,7 +10,10 @@
     <div class="form-group">
         <label for="name" class="col-md-4">{{ __('Name') }}</label>
         <div class="col-md-6">
-            <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}" required autofocus>
+            <input id="name" type="text" class="form-control @if ($errors->has('name')) is-invalid @endif" name="name" value="{{ old('name', $user->name) }}" required autofocus>
+            @if ($errors->has('name'))
+                <span class="invalid-feedback">{{ $errors->first('name') }}</span>
+            @endif
         </div>
     </div>
     <div class="form-group">

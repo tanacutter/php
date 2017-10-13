@@ -50,7 +50,7 @@ class CalendarController extends Controller
         $calendar->available_time = $request->available_time;
         $calendar->user_id = $request->user()->id;
         $calendar->save();
-        return redirect('calendars/'.$calendar->id);
+        return redirect('calendars/' . $calendar->id)->with('status', __('Posted new article.'));
     }
 
     /**
@@ -88,7 +88,7 @@ class CalendarController extends Controller
         $this->authorize('edit', $calendar);
         $calendar->available_time = $request->available_time;
         $calendar->save();
-        return redirect('calendars/'.$calendar->id);
+        return redirect('calendars/'.$calendar->id)->with('status', __('Updated an article.'));
     }
 
     /**
@@ -101,6 +101,6 @@ class CalendarController extends Controller
     {
         $this->authorize('edit', $calendar);
         $calendar->delete();
-        return redirect('calendars.index');
+        return redirect('calendars.index')->with('status', __('Deleted an article.'));
     }
 }
