@@ -30,8 +30,8 @@
             <ul class="navbar-nav mr-auto">
               <li class="nav-item @if (my_is_current_controller('users')) active @endif">
                   <a class="nav-link" href="{{ url('users') }}">
-                      {{ __('Users') }}
-                      @if (my_is_current_controller('users'))
+                      {{ __('Profile') }}
+                      @if (my_is_current_controller('profiles'))
                           <span class="sr-only">(current)</span>
                       @endif
                   </a>

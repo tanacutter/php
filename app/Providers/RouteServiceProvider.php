@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\User;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,9 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        // In Profile Model, Explicit Binding
+        Route::model('user', User::class);
     }
 
     /**
