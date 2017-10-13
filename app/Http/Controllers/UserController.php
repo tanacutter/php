@@ -52,6 +52,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user->calendars = $user->calendars()->paginate(5);
         return view('users.show', ['user' => $user]);
     }
 

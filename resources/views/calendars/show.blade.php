@@ -18,6 +18,12 @@
 
 <!-- カレンダー一件の情報 -->
 <dl class="row">
+    <dt class="col-md-2">{{ __('Author') }}:</dt>
+    <dd class="col-md-10">
+        <a href="{{ url('users/'.$calendar->user->id) }}">
+            {{ $calendar->user->name }}
+        </a>
+    </dd>
     <dt class="col-md-2">{{ __('ID') }}</dt>
     <dd class="col-md-10">{{ $calendar->id }}</dd>
     <dt class="col-md-2">{{ __('Name') }}</dt>

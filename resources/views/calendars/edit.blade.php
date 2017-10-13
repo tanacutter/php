@@ -8,7 +8,7 @@
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     <div class="form-group">
-        <label for="available_time" class="col-md-4">{{ __('Name') }}</label>
+        <label for="available_time" class="col-md-4">{{ __('Available_time') }}</label>
         <div class="col-md-6">
             <input id="available_time" type="text" class="form-control" name="available_time" value="{{ $calendar->available_time }}" required autofocus>
         </div>

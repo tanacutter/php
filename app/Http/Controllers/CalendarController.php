@@ -14,7 +14,7 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        $calendars = Calendar::latest()->get();
+        $calendars = Calendar::orderBy('available_time', 'desc')->get();
         return view('calendars.index', ['calendars' => $calendars]);
     }
 
@@ -61,7 +61,7 @@ class CalendarController extends Controller
      */
     public function edit(Calendar $calendar)
     {
-        return view('calenddars.edit', ['calendar' => $calendar]);
+        return view('calendars.edit', ['calendar' => $calendar]);
     }
 
     /**

@@ -26,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Relation: User has many Posts.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function calendars()
+    {
+        // 新しい順で取得する
+        return $this->hasMany('App\Calendar')->latest();
+    }
+
+
 }

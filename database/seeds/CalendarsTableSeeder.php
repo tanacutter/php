@@ -14,9 +14,17 @@ class CalendarsTableSeeder extends Seeder
         // Faker
         $faker = Faker\Factory::create('ja_JP');
 
-        // default time
-        DB::table('calendars')->insert([
-            'available_time' => $faker->dateTime(),
-        ]);
+
+        // ランダムにユーザーを作成
+        for ($i = 0; $i < 18; $i++)
+        {
+            // default
+            DB::table('calendars')->insert([
+                'user_id' => $faker->numberBetween(1, 20),
+                'available_time' => $faker->dateTime(),
+                'created_at' => $faker->dateTime(),
+                'updated_at' => $faker->dateTime(),
+            ]);
+        }
     }
 }
