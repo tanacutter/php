@@ -52,6 +52,14 @@
                        @endif
                    </a>
                 </li>
+               <li class="nav-item @if (my_is_current_controller('menus')) active @endif">
+                   <a class="nav-link" href="{{ url('menus') }}">
+                       {{ __('Menus') }}
+                       @if (my_is_current_controller('menus'))
+                           <span class="sr-only">(current)</span>
+                       @endif
+                   </a>
+                </li>
             </ul>
             <!-- 右詰め (上で .mr-auto を指定しているため) -->
             <ul class="navbar-nav my-2 my-lg-0">

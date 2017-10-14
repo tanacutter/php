@@ -30,3 +30,5 @@ Route::put('profiles/{user}', 'ProfileController@update');
 Route::delete('profiles/{user}', 'ProfileController@delete');
 
 Route::resource('staffs', 'StaffController');
+
+Route::resource('menus', 'MenuController');

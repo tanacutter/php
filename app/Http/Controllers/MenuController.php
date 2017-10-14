@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Menu;
 
 class MenuController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +15,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+      $menus = Menu::all();
+      return view('menus.index', ['menus' => $menus]);
     }
 
     /**
@@ -23,7 +26,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+      return view('menus.create');
     }
 
     /**
@@ -34,7 +37,11 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $menu = new Menu;
+      $menu->name = $request->name;
+      $menu->minutes = $request->minutes;
+      $menu->save();
+      return redirect('menus/'.$menu->id)->with('status', __('Created a menu.'));
     }
 
     /**
@@ -43,9 +50,9 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Menu $menu)
     {
-        //
+        return view('menus.show', ['menu' => $menu]);
     }
 
     /**
@@ -54,9 +61,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Menu $menu)
     {
-        //
+        // $this->authorize('edit', $menu);
+        return view('menus.edit', ['menu' => $menu]);
     }
 
     /**
@@ -66,9 +74,13 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Menu $menu)
     {
-        //
+        // $this->authorize('edit', $menu);
+        $menu->name = $request->name;
+        $menu->minutes = $request->minutes;
+        $menu->save();
+        return redirect('menus/'.$menu->id)->with('status', __('Updated a menu.'));
     }
 
     /**
@@ -77,8 +89,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-        //
+        // $this->authorize('edit', $menu);
+        $menu->delete();
+        return redirect('menus')->with('status', __('Deleted a menu.'));
     }
 }
