@@ -23,9 +23,10 @@ Route::resource('users', 'UserController');
 
 Route::resource('calendars', 'CalendarController');
 
-// Route::resource('profiles', 'ProfileController');
 Route::get('profiles/', 'ProfileController@index');
 Route::get('profiles/{user}', 'ProfileController@show');
 Route::get('profiles/{user}/edit', 'ProfileController@edit');
 Route::put('profiles/{user}', 'ProfileController@update');
 Route::delete('profiles/{user}', 'ProfileController@delete');
+
+Route::resource('staffs', 'StaffController');

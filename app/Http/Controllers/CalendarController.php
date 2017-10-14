@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Calendar;
+use App\Staff;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends Controller
 {
@@ -33,9 +35,10 @@ class CalendarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Calendar $calendar)
     {
-        return view('calendars.create');
+        $calendar->staffs = Staff::all()->where('user_id', Auth::id());
+        return view('calendars.create', ['calendar' => $calendar]);
     }
 
     /**
@@ -47,8 +50,9 @@ class CalendarController extends Controller
     public function store(Request $request)
     {
         $calendar = new Calendar;
-        $calendar->available_time = $request->available_time;
         $calendar->user_id = $request->user()->id;
+        $calendar->available_time = $request->available_time;
+        $calendar->staff_id = $request->staff_id;
         $calendar->save();
         return redirect('calendars/' . $calendar->id)->with('status', __('Created new cal.'));
     }

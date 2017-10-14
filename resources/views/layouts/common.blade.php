@@ -28,8 +28,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- 左詰め -->
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item @if (my_is_current_controller('users')) active @endif">
-                  <a class="nav-link" href="{{ url('users') }}">
+              <li class="nav-item @if (my_is_current_controller('profiles')) active @endif">
+                  <a class="nav-link" href="{{ url('profiles') }}">
                       {{ __('Profile') }}
                       @if (my_is_current_controller('profiles'))
                           <span class="sr-only">(current)</span>
@@ -40,6 +40,14 @@
                    <a class="nav-link" href="{{ url('calendars') }}">
                        {{ __('Calendars') }}
                        @if (my_is_current_controller('calendars'))
+                           <span class="sr-only">(current)</span>
+                       @endif
+                   </a>
+                </li>
+               <li class="nav-item @if (my_is_current_controller('staffs')) active @endif">
+                   <a class="nav-link" href="{{ url('staffs') }}">
+                       {{ __('Staffs') }}
+                       @if (my_is_current_controller('staffs'))
                            <span class="sr-only">(current)</span>
                        @endif
                    </a>

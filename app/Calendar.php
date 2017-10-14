@@ -16,4 +16,14 @@ class Calendar extends Model
       return $this->belongsTo('App\User');
   }
 
+  /**
+   * Relation: Calendar is related to Staff.
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+   */
+  public function staff()
+  {
+      return $this->belongsTo('App\Staff');
+  }
+
 }

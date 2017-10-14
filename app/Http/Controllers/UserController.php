@@ -10,10 +10,10 @@ use App\Http\Requests\UpdateUser;
 class UserController extends Controller
 {
 
-  /**
-   * Auth except index
-   *
-   */
+    /**
+     * Auth except index
+     *
+     */
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
