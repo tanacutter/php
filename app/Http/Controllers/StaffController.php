@@ -95,10 +95,10 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Staff $staff)
     {
         // $this->authorize('edit', $user);
-        $user->delete();
+        $staff->delete();
         return redirect('staffs')->with('status', __('Deleted a user.'));
     }
 }
