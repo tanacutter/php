@@ -26,6 +26,17 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="minutes" class="col-md-4">{{ __('担当者') }}</label>
+        <div class="col-md-6">
+            @foreach ($staffs as $staff)
+                <label for="staff{{ $staff->id }}"><input type="checkbox" name="staff_id" value="{{ $staff->id }}" id="staff{{ $staff->id }}">{{ $staff->name }}</label>
+            @endforeach
+            @if ($errors->has('minutes'))
+                <span class="invalid-feedback">{{ $errors->first('minutes') }}</span>
+            @endif
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-8">
             <button type="submit" name="submit" class="btn btn-success">
                 {{ __('Submit') }}

@@ -1,5 +1,5 @@
 @php
-    $title = __('Staffs');
+    $title = __('スタッフ一覧');
 @endphp
 @extends('layouts.common')
 @section('content')

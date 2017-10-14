@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Staff;
+use App\Menu_relationship;
 use App\Http\Requests\UpdateStaff;
 
 class StaffController extends Controller
@@ -56,6 +58,11 @@ class StaffController extends Controller
     public function show(Staff $staff)
     {
         $staff->calendars = $staff->calendars()->paginate(5);
+        $staff->menus = DB::table('menus')
+                        ->leftJoin('menu_relationships', 'menus.id', '=', 'menu_relationships.menu_id')
+                        ->where('staff_id', $staff->id)
+                        ->get();
+
         return view('staffs.show', ['staff' => $staff]);
     }
 

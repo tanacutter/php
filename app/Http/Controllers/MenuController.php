@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Menu;
+use App\Staff;
+use App\Menu_relationship;
+use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
@@ -26,7 +29,8 @@ class MenuController extends Controller
      */
     public function create()
     {
-      return view('menus.create');
+        $staffs = Staff::all();
+        return view('menus.create', ['staffs' => $staffs]);
     }
 
     /**
@@ -35,13 +39,21 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Menu $menu)
     {
-      $menu = new Menu;
-      $menu->name = $request->name;
-      $menu->minutes = $request->minutes;
-      $menu->save();
-      return redirect('menus/'.$menu->id)->with('status', __('Created a menu.'));
+      $new_menu = new Menu;
+      $new_menu->name = $request->name;
+      $new_menu->minutes = $request->minutes;
+      $new_menu->save();
+
+      $menu_relationship = new Menu_relationship;
+      $menu_relationship->menu_id = $menu->latest_menu()->id;
+      $menu_relationship->staff_id = $request->staff_id;
+      $menu_relationship->user_id = Auth::id();
+      $menu_relationship->timestamps = false;
+      $menu_relationship->save();
+
+      return redirect('menus/'.$new_menu->id)->with('status', __('Created a menu.'));
     }
 
     /**

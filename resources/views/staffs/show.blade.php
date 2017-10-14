@@ -31,8 +31,44 @@
         <dd class="col-md-10">{{ $staff->img }}</dd>
     </dl>
 
-    <!-- スタッフの全てのカレンダーを表示 -->
-    <h2>{{ __('Calendars') }}</h2>
+    <h2>担当可能メニュー</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>メニュー名</th>
+                    @can('edit', $staff)
+                      <th></th>
+                    @endcan
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($staff->menus as $menu)
+                    <tr>
+                        <td>
+                            <a href="{{ url('menus/'.$menu->menu_id) }}">
+                                {{ $menu->name }}
+                            </a>
+                        </td>
+                        @can('edit', $staff)
+                          <td nowrap>
+                              <a href="{{ url('menus/'.$menu->id.'/edit') }}" class="btn btn-primary">
+                                  {{ __('Edit') }}
+                              </a>
+                              @component('components.btn-del')
+                                  @slot('controller', 'menus')
+                                  @slot('id', $menu->id)
+                                  @slot('value', $menu->available_time)
+                              @endcomponent
+                          </td>
+                        @endcan
+                     </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <h2>空き状況</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
