@@ -1,7 +1,7 @@
 @php
     $title = __('Edit').': '.$calendar->available_time;
 @endphp
-@extends('layouts.my')
+@extends('layouts.common')
 @section('content')
 <h1>{{ $title }}</h1>
 <form action="{{ url('calendars/'.$calendar->id) }}" method="post">

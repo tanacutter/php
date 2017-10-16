@@ -1,5 +1,5 @@
 @php
-    $title = __('Menus');
+    $title = 'メニュー管理';
 @endphp
 @extends('layouts.common')
 @section('content')
@@ -11,8 +11,8 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>{{ __('Name') }}</th>
-                <th>{{ __('所要時間') }}</th>
+                <th>名前</th>
+                <th>所要時間</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@
             @foreach ($menus as $menu)
                 <tr>
                     <td><a href="{{ url('menus/'.$menu->id) }}">{{ $menu->name }}</a></td>
-                    <td>{{ $menu->minutes }}</td>
+                    <td>{{ $menu->minutes }}分</td>
                     <td nowrap>
                         <a href="{{ url('menus/'.$menu->id.'/edit') }}" class="btn btn-primary">
                             {{ __('Edit') }}

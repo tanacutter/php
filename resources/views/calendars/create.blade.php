@@ -1,7 +1,7 @@
 @php
     $title = __('Create Calendar');
 @endphp
-@extends('layouts.my')
+@extends('layouts.common')
 @section('content')
 <h1>{{ $title }}</h1>
 <form action="{{ url('calendars') }}" method="post">

@@ -36,18 +36,10 @@
                       @endif
                   </a>
               </li>
-               <li class="nav-item @if (my_is_current_controller('calendars')) active @endif">
+                <li class="nav-item @if (my_is_current_controller('calendars')) active @endif">
                    <a class="nav-link" href="{{ url('calendars') }}">
                        {{ __('Calendars') }}
                        @if (my_is_current_controller('calendars'))
-                           <span class="sr-only">(current)</span>
-                       @endif
-                   </a>
-                </li>
-               <li class="nav-item @if (my_is_current_controller('staffs')) active @endif">
-                   <a class="nav-link" href="{{ url('staffs') }}">
-                       {{ __('Staffs') }}
-                       @if (my_is_current_controller('staffs'))
                            <span class="sr-only">(current)</span>
                        @endif
                    </a>
@@ -68,6 +60,13 @@
                 <li class="nav-item">
                     <a href="{{ url('calendars/create') }}" id="new-calendar" class="btn btn-success">
                         {{ __('New Calendar') }}
+                    </a>
+                </li>
+
+                <!-- 予約ボタン -->
+                <li class="nav-item">
+                    <a href="{{ url('reserves/' . $user->id) }}" id="new-calendar" class="btn btn-success">
+                        {{ __('ご予約') }}
                     </a>
                 </li>
 

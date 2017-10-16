@@ -1,7 +1,7 @@
 @php
     $title = __('calendar') . ': ' . $calendar->name;
 @endphp
-@extends('layouts.my')
+@extends('layouts.common')
 @section('content')
 <h1>{{ $title }}</h1>
 

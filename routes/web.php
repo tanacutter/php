@@ -29,6 +29,9 @@ Route::get('profiles/{user}/edit', 'ProfileController@edit');
 Route::put('profiles/{user}', 'ProfileController@update');
 Route::delete('profiles/{user}', 'ProfileController@delete');
 
-Route::resource('staffs', 'StaffController');
+// Route::resource('staffs', 'StaffController');
 
 Route::resource('menus', 'MenuController');
+
+Route::get('reserves/{user}', 'ReserveController@show');
+Route::put('reserves/{user}', 'ReserveController@update');

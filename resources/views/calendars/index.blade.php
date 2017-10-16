@@ -1,7 +1,7 @@
 @php
     $title = __('Calendars');
 @endphp
-@extends('layouts.my')
+@extends('layouts.common')
 @section('content')
 <h1>{{ $title }}</h1>
 <div class="table-responsive">
