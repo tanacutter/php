@@ -28,6 +28,8 @@ class ReserveController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // 予約完了メール
+        
         return redirect('profiles/'.$user->id)->with('status', __('ご予約完了しました。'));
     }
 
