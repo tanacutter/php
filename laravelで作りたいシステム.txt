@@ -17,3 +17,140 @@ Service Name: simple reserve calendar
 *Authorization 他のユーザー情報は見れないように
 
 クライアントのサイトでの実装サービス
+
+
+
+
+
+
+
+
+まずはminimoやSARAHの真似をして、ミニマムな仕組みを作ってローンチ。
+
+メッセージ機能、アプリは後回し。
+ローンチするまでにすること、その後の拡大スケジュールを決める。
+
+reactカレンダー予約システム
+
+公開ページと会員専用ページをlaravelで。
+
+管理画面はスマホで使えるように。
+
+■ユーザーの画面構成
+
+- ユーザー登録
+
+- オーナー登録
+
+- トップページ
+
+- 検索ページ（sitename.com/area-name/service-type/?detail=kodawari&service_name=xxx&...）
+
+- 検索結果ページ
+
+- ブログ(wiki形式)
+
+- メニュー/セミナー説明ページ
+
+- イベント/セミナー情報一覧
+
+- 詳細ページ
+
+    - メニュー / セミナー
+
+        - 予約
+
+    - プロフィール
+
+        - 推薦するオーナー
+
+    - 口コミ（FB連携？）
+
+    - 地図
+
+- ヘルプ
+
+- 報告フォーム
+
+■プラクティショナーの管理画面
+
+- プロフィール編集
+
+- メニュー管理（メニューの名前、取扱メニューのカテゴリ）
+
+- 予約管理
+
+    - お客さんの情報
+
+    - 予約可能な日時の登録
+
+- セミナー開催登録
+
+- 口コミへの返信
+- wikiブログ作成
+
+■ディレクトリ構成
+
+- index
+    - admin
+        - menu (p)
+        - profile (p)
+        - review (p/u)
+        - reserve (p/u)
+        - report (u)
+        - want (u)
+- search
+- list/{prefecture}/{district}/{practitioners_id}/?駅名、こだわり条件...
+    - menu
+        - reserve
+    - profile
+    - review
+    - map
+- help
+
+■テーブル設計
+
+- admin_users(id, name, email, password, photo, ...)
+- practitioners(id, admin_user_id, prefecture_id, district_id, station_id, st_line_id, pr_text, belong_to, regular_holiday, business_hour, experience_years, credit_card, parking, gender, notes) notesは備考
+- credit_cards(id, name) master, visa, amex, paypal
+- practitioner_cards(id, credit_cards_id, practitioners_id)
+- customers(id, admin_user_id)
+- customer_wants(id, customers_id)
+- menu_categories(id, name, description, parent_id) （例：スピリチュアル＞ヒーリング＞DNAアクティベーション）初めは大まかなカテゴリのみ用意しておく
+- practitioner_menus(id, practitioners_id, menu_categories_id, name, description, time, price) 独自のキャッチコピーなどをタイトルにつけられるように
+- kodawaris(id, name) ２人で入れる,サロン所有,出張可,男性可,女性専用,猫,犬,
+- kodawari_relationships(id, kodawaris_id, practitioners_id)
+- reviews(id, title, body, evaluate, customers_id, menus_id)
+- review_replys(id, body, reviews_id, practitioners_id)
+- available_times(id, year, month, date, time) 予約は15分おきに開始可能に
+- practitioner_available_times(id, available_times_id, practitioners_id)
+- reserves(id, customers_id, practitioners_id, menus_id, date) dateには予約日時間を入れる
+- prefectures(code, name)
+- districts(code, prefectures_id, name, kana)
+- stations(station_cd station_g_cd station_name station_name_k station_name_r line_cd pref_cd post add lon lat open_ymd close_ymd e_status e_sort)
+- st_lines(line_cd company_cd line_name line_name_k line_name_h line_color_c line_color_t line_type lon lat zoom e_status e_sort)
+
+メニューは menus テーブルで全体管理。既存のメニューを追加した場合は menus テーブルに追加しない。
+施術者各人のメニューは menu_relationships テーブルで施術時間や料金などを記録。
+
+■登録する人
+心と頭を整える人たち。カウンセラー、占い師、ヒーラー、ヨガインストラクター、瞑想、アロマセラピスト...
+
+■こだわり条件
+プライベートサロン設定、出張可能区域、男性可
+
+■お客さんが利用できるサービス
+メニューの予約、メールカウンセリング、電話カウンセリング。
+サービスの種類（アロマ,ヒーリング,占い,カウンセリング...）、サービス名,地域検索、こだわり条件、からの絞り込み検索。
+クチコミ投稿
+
+■メニュー形態
+セッション、セミナー
+
+登録は紹介制か、本人確認。
+
+サロンではなく個人を掲載する。
+
+ブログ機能でその人の発信内容が観れる。みんなで協力してwiki的なものを作る。1キーワード1記事をみんなで編集し合う。オーサーリンク、コントリビュートリンクをつける。
+
+くに先生や、村上さんに紹介して貰った人のみちさん、藤井みのりさんに使ってもらう、最初は。
