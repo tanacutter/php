@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Practitioner;
+
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -9,7 +11,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-class ExampleController extends Controller
+class PractitionerController extends Controller
 {
     use ModelForm;
 
@@ -69,7 +71,7 @@ class ExampleController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(YourModel::class, function (Grid $grid) {
+        return Admin::grid(Practitioner::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
 
@@ -85,10 +87,12 @@ class ExampleController extends Controller
      */
     protected function form()
     {
-        return Admin::form(YourModel::class, function (Form $form) {
+        return Admin::form(Practitioner::class, function (Form $form) {
 
             $form->display('id', 'ID');
 
+            $form->display('created_at', 'Created At');
+            $form->display('updated_at', 'Updated At');
         });
     }
 }

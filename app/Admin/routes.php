@@ -12,5 +12,6 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('practitioner-menus', 'PractitionerMenuController');
+    $router->resource('practitioner', 'PractitionerController');
 
 });

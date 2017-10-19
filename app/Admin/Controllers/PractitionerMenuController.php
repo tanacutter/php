@@ -73,10 +73,8 @@ class PractitionerMenuController extends Controller
     {
         return Admin::grid(PractitionerMenu::class, function (Grid $grid) {
 
-            $grid->id('ID')->sortable();
+            $grid->column('name', 'メニュー名');
 
-            $grid->created_at();
-            $grid->updated_at();
         });
     }
 
@@ -89,6 +87,7 @@ class PractitionerMenuController extends Controller
     {
         return Admin::form(PractitionerMenu::class, function (Form $form) {
 
+            $form->hidden('practitioners_id')->default('1');
             $form->text('menu_categories_id', 'メニューカテゴリ');
             $form->text('name', 'メニュー名');
             $form->textarea('description', 'メニュー説明');

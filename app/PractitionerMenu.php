@@ -13,4 +13,11 @@ class PractitionerMenu extends Model
      */
     protected $table = 'practitioner_menus';
 
+    /**
+     * モデルのタイムスタンプを更新するかの指示
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+    
 }
