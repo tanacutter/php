@@ -14,6 +14,8 @@ use Encore\Admin\Controllers\ModelForm;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\RedirectResponse;
+
 class PractitionerController extends Controller
 {
     use ModelForm;
@@ -25,13 +27,12 @@ class PractitionerController extends Controller
      */
     public function index()
     {
-        return Admin::content(function (Content $content) {
-
-            $content->header('プロフィール編集');
-            // $content->description('');
-
-            $content->body($this->form());
-        });
+        $user_data_exist = DB::select('SELECT id FROM practitioners WHERE admin_users_id = ?', [Admin::user()->id]);
+        if ($user_data_exist) {
+            return redirect('admin/practitioner/' . Admin::user()->id . '/edit');
+        } else {
+            return redirect('admin/practitioner/create');
+        }
     }
 
     /**
@@ -43,7 +44,6 @@ class PractitionerController extends Controller
     public function edit($id)
     {
         return Admin::content(function (Content $content) use ($id) {
-
             $content->header('header');
             $content->description('description');
 
