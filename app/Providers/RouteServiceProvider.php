@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         // In Profile Model, Explicit Binding
-        Route::model('user', User::class);
+        // Route::model('user', User::class);
     }
 
     /**
