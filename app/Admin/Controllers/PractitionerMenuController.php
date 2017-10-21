@@ -96,7 +96,7 @@ class PractitionerMenuController extends Controller
         return Admin::form(PractitionerMenu::class, function (Form $form) {
 
             $form->hidden('practitioners_id')->default('1');
-            $form->select('menu_categories_id', 'メニューカテゴリ')->options(function(){
+            $form->select('menu_categories_id', 'カテゴリ')->options(function(){
                     $menu_categories = DB::select('SELECT id,name FROM menu_categories');
                     $result = array();
                     $result[] = 'カテゴリを選択してください';
