@@ -13,8 +13,8 @@ class FeelProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Feel $feel)
     {
-        echo 'profile';
+        return view('feels.profile', ['feel' => $feel]);
     }
 }

@@ -13,8 +13,9 @@ class FeelMenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Feel $feel)
     {
-        echo 'menu';
+        return view('feels.menu', ['feel' => $feel]);
     }
+
 }

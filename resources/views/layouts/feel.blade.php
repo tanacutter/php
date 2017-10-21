@@ -88,11 +88,10 @@
             </div>
         </nav>
 
-        @yield('content')
         <nav>
           <ul class="nav-recruit">
             <li>
-              <a href="{{ url('feel', [$feel->admin_users_id, 'top']) }}" class="nav-top">トップ</a>
+              <a href="{{ url('feel', [$feel->admin_users_id]) }}" class="nav-top">トップ</a>
             </li>
             <li>
               <a href="{{ url('feel', [$feel->admin_users_id, 'menu']) }}" class="nav-menu">メニュー</a>
@@ -105,6 +104,8 @@
             </li>
           </ul>
         </nav>
+
+        @yield('content')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

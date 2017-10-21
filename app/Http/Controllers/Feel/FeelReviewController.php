@@ -13,8 +13,8 @@ class FeelReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Feel $feel)
     {
-        echo 'review';
+        return view('feels.review', ['feel' => $feel]);
     }
 }

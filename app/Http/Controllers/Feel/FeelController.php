@@ -16,7 +16,7 @@ class FeelController extends Controller
      */
     public function show(Feel $feel)
     {
-        return view('feels.show', ['feel' => $feel]);
+        return view('feels.top', ['feel' => $feel]);
     }
 
 }
