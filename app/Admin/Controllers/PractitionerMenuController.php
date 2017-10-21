@@ -10,6 +10,9 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class PractitionerMenuController extends Controller
 {
@@ -93,7 +96,16 @@ class PractitionerMenuController extends Controller
         return Admin::form(PractitionerMenu::class, function (Form $form) {
 
             $form->hidden('practitioners_id')->default('1');
-            $form->text('menu_categories_id', 'メニューカテゴリ');
+            $form->select('menu_categories_id', 'メニューカテゴリ')->options(function(){
+                    $menu_categories = DB::select('SELECT id,name FROM menu_categories');
+                    $result = array();
+                    $result[] = 'カテゴリを選択してください';
+                    foreach ($menu_categories as $category) {
+                        $result[$category->id] = $category->name;
+                    }
+                    return $result;
+                }
+            );
             $form->text('name', 'メニュー名');
             $form->textarea('description', 'メニュー説明');
             $form->text('time', '所要時間(分)');
