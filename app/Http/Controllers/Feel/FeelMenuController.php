@@ -15,6 +15,7 @@ class FeelMenuController extends Controller
      */
     public function index(Feel $feel)
     {
+        // $feel = new Feel();
         return view('feels.menu', ['feel' => $feel]);
     }
 

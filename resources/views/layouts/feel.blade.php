@@ -88,6 +88,8 @@
             </div>
         </nav>
 
+{{$feel}}
+
         <nav>
           <ul class="nav-recruit">
             <li>
