@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PractitionerMenu extends Model
+class MenuCategory extends Model
 {
     /**
      * Indicate table name
      *
      * @var array
      */
-    protected $table = 'practitioner_menus';
+    protected $table = 'menu_categories';
 
     /**
      * モデルのタイムスタンプを更新するかの指示
@@ -19,18 +19,13 @@ class PractitionerMenu extends Model
      * @var bool
      */
     public $timestamps = false;
-
+    
     /**
      * Relational table
      */
-    public function practitioners()
+    public function practitioner_menus()
     {
-        return $this->belongsTo(Practitioner::class);
-    }
-
-    public function practitioner_categories()
-    {
-        return $this->belongsTo(MenuCategory::class);
+        return $this->hasMany(PractitionerMenu::class);
     }
 
 }

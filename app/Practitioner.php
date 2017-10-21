@@ -20,4 +20,9 @@ class Practitioner extends Model
      */
     public $timestamps = false;
 
+    public function practitioner_menus()
+    {
+        return $this->hasMany(PractitionerMenu::class);
+    }
+
 }
