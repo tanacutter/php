@@ -28,9 +28,9 @@ class PractitionerMenu extends Model
         return $this->belongsTo(Practitioner::class);
     }
 
-    public function practitioner_categories()
+    public function menu_categories()
     {
-        return $this->belongsTo(MenuCategory::class);
+        return $this->belongsTo(MenuCategory::class, 'menu_categories_id', 'id');
     }
 
 }

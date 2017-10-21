@@ -74,7 +74,9 @@ class PractitionerMenuController extends Controller
         return Admin::grid(PractitionerMenu::class, function (Grid $grid) {
 
             $grid->column('name', 'メニュー名');
-            $grid->column('menu_categories_id', 'カテゴリ');
+            $grid->menu_categories('カテゴリ')->display(function ($category) {
+                return "{$category['name']}";
+            });
             $grid->column('time', '時間');
             $grid->column('price', '料金');
 
@@ -91,10 +93,6 @@ class PractitionerMenuController extends Controller
         return Admin::form(PractitionerMenu::class, function (Form $form) {
 
             $form->hidden('practitioners_id')->default('1');
-            $form->practitioner_categories()->display(function ($category) {
-                $count = count($category);
-                return "<span class='label label-warning'>{$count}</span>";
-            });
             $form->text('menu_categories_id', 'メニューカテゴリ');
             $form->text('name', 'メニュー名');
             $form->textarea('description', 'メニュー説明');

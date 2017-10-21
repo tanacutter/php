@@ -19,13 +19,13 @@ class MenuCategory extends Model
      * @var bool
      */
     public $timestamps = false;
-    
+
     /**
      * Relational table
      */
     public function practitioner_menus()
     {
-        return $this->hasMany(PractitionerMenu::class);
+        return $this->hasMany(PractitionerMenu::class, 'id', 'menu_categories_id');
     }
 
 }
